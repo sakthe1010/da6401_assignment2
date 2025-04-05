@@ -1,3 +1,5 @@
-nature_12K/*
+inaturalist_12K/*
 venv/*
 lightning_logs/*
+wandb/*
+assignment_2/*
