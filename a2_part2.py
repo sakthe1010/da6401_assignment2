@@ -82,7 +82,7 @@ def get_data_loaders(data_dir, image_size, batch_size, data_augment):
 # PyTorch Lightning Module for Fine-Tuning Pre-Trained ResNet50
 # ---------------------------
 class LitFinetuneResNet(pl.LightningModule):
-    def __init__(self, freeze_strategy="strat2", num_classes=10, lr=1e-3):
+    def __init__(self, freeze_strategy="strat2", num_classes=10, lr=1e-3, weight_decay=0.0):
         """
         freeze_strategy options:
           - "strat1": Freeze all layers except the final fully connected layer.
@@ -140,7 +140,11 @@ class LitFinetuneResNet(pl.LightningModule):
     
     def configure_optimizers(self):
         # Only update parameters with requires_grad=True.
-        optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, self.parameters()), lr=self.lr)
+        optimizer = torch.optim.Adam(
+            filter(lambda p: p.requires_grad, self.parameters()),
+            lr=self.lr,
+            weight_decay=self.hparams.weight_decay
+        )
         return optimizer
 
 # ---------------------------
@@ -157,9 +161,10 @@ def main():
                         choices=["strat1", "strat2", "full"],
                         help="Freeze strategy to use for fine-tuning")
     parser.add_argument("--lr", type=float, default=1e-3)
+    parser.add_argument("--weight_decay", type=float, default=0.0, help="Weight decay (L2 regularization)")
     parser.add_argument("--data_augment", type=lambda x: x.lower() == "true", default=False,
                         help="Enable data augmentation")
-    parser.add_argument("--max_epochs", type=int, default=20)
+    parser.add_argument("--max_epochs", type=int, default=5)
     args = parser.parse_args()
     
     # Initialize wandb (project name "assignment_2")
@@ -167,7 +172,7 @@ def main():
     config = wandb.config
 
     # Create a dynamic run name without including the freeze strategy (since it's constant)
-    dynamic_run_name = f"lr_{config.lr}_aug_{config.data_augment}_bs_{config.batch_size}"
+    dynamic_run_name = f"lr_{config.lr}_wd_{config.weight_decay}_aug_{config.data_augment}_bs_{config.batch_size}"
     wandb.run.name = dynamic_run_name
 
     # Get train and validation data loaders (using the 'train' folder)
@@ -177,14 +182,15 @@ def main():
     model = LitFinetuneResNet(
         freeze_strategy=config.freeze_strategy,
         num_classes=10,
-        lr=config.lr
+        lr=config.lr,
+        weight_decay=config.weight_decay
     )
     
     # Set up the PyTorch Lightning Trainer with wandb logging
     wandb_logger = pl.loggers.WandbLogger(project="assignment_2")
     trainer = pl.Trainer(
         precision=16,
-        check_val_every_n_epoch=2,
+        check_val_every_n_epoch=5,
         max_epochs=config.max_epochs,
         accelerator="gpu" if torch.cuda.is_available() else "cpu",
         logger=wandb_logger,
