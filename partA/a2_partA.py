@@ -190,7 +190,7 @@ def get_data_loaders(data_dir, image_size, batch_size, data_augment):
 # ---------------------------
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_dir", type=str, default="./inaturalist_12k",
+    parser.add_argument("--data_dir", type=str, default="../inaturalist_12k",
                         help="Path to dataset directory (should contain a 'train' folder with one folder per class)")
     parser.add_argument("--batch_size", type=int, default=32)
     parser.add_argument("--image_size", type=int, default=224)

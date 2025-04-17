@@ -152,7 +152,7 @@ class LitFinetuneResNet(pl.LightningModule):
 # ---------------------------
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_dir", type=str, default="./inaturalist_12k",
+    parser.add_argument("--data_dir", type=str, default="../inaturalist_12k",
                         help="Path to dataset directory (should contain a 'train' folder with one folder per class)")
     parser.add_argument("--batch_size", type=int, default=32)
     parser.add_argument("--image_size", type=int, default=224)

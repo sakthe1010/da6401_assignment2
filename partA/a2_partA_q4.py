@@ -158,7 +158,7 @@ def get_data_loaders(data_dir, image_size=224, batch_size=64):
 ###############################################################################
 def train_and_evaluate():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_dir", type=str, default="./inaturalist_12k",
+    parser.add_argument("--data_dir", type=str, default="././inaturalist_12k",
                         help="Path to dataset folder with 'train'/'test'.")
     parser.add_argument("--batch_size", type=int, default=64)
     parser.add_argument("--max_epochs", type=int, default=10, 

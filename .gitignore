@@ -4,3 +4,5 @@ lightning_logs/*
 wandb/*
 assignment_2/*
 __pycache__/*
+partA/wandb/*
+partB/wandb/*
