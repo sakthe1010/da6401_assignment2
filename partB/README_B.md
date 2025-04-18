@@ -13,7 +13,7 @@ To run the main code:
 ```bash
 python a2_partB.py --data_dir <path_to_dataset> --max_epochs 10 --batch_size --freeze_stratergy <strat2> --lr --weight_decay --image_size --data_augment
 ```
-The choices for freeze_stratergy arguement is [strat1, strat2, full] 
+The choices for freeze_stratergy arguement are [strat1, strat2, full] 
 
 WandB Hyperparameter Sweep:
 ```bash
