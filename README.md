@@ -8,7 +8,7 @@ This repository contains the implementation of CNN models for DA6401 Assignment 
   - `a2_partA_q4.py`
   - `prediction_grid.png`
   - `sweep.yaml`
-- partB - folder containing the scripts and yaml files implementing the partB of the assignment
+- `partB` - folder containing the scripts and yaml files implementing the partB of the assignment
   - `a2_partB.py`
   - `sweep_2.yaml`
 - `.gitignore`
