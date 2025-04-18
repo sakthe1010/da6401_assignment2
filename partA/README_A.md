@@ -13,11 +13,11 @@ This folder contains code for building and training a Convolutional Neural Netwo
 ### Training and Validation:
 To run the main code:
 ```bash
-python a2_partA.py --data_dir <path_to_dataset> --max_epochs <5/10/20> --batch_size <32/64>
+python a2_partA.py --data_dir <path_to_dataset> --max_epochs 10 --batch_size 64
 ```
 To run the best model script:
 ```bash
-python a2_partA_q4.py --data_dir <path_to_dataset> --max_epochs <5/10/20> --batch_size <32/64> --save_grid <name.png>
+python a2_partA_q4.py --data_dir <path_to_dataset> --max_epochs 10 --batch_size 64 --save_grid <any_name.png>
 ```
 
 ### Hyperparameter Tuning with WandB:
