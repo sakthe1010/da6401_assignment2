@@ -7,12 +7,9 @@ import pytorch_lightning as pl
 import matplotlib.pyplot as plt
 from torchvision import transforms, datasets
 from torch.utils.data import DataLoader, Subset
-import wandb  # optional if you want logging
+import wandb 
 import math
 
-###############################################################################
-# 1) LitCNN CLASS (same as in a2_part1.py but simplified to your best config)
-###############################################################################
 class LitCNN(pl.LightningModule):
     def __init__(
         self,
@@ -112,7 +109,7 @@ def get_data_loaders(data_dir, image_size=224, batch_size=64):
     mean = [0.485, 0.456, 0.406]
     std = [0.229, 0.224, 0.225]
 
-    # No data augmentation, per your best config
+    # No data augmentation for best configS
     train_transform = transforms.Compose([
         transforms.Resize((image_size, image_size)),
         transforms.ToTensor(),
